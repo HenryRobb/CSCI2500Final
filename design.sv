@@ -1,4 +1,5 @@
 // Code your design here
+//edit
 module fadd (co, s, a, b, c);
   input a, b ,c;
   output co, s;
@@ -51,7 +52,7 @@ module sub8 (s, cout, ci, a, b);
   add8 a0(hold, cout, ci, invv, one);//add 1 to b
   add8 a1(s, cout, ci, a, hold); //add a and negative b
 endmodule
-  
+
 
 module and8(s, a, b);
   input [7:0] a, b;
@@ -87,15 +88,15 @@ module alu(s, cout, ci, a, b, aluMode);
   output reg [7:0] s ; // vector
   output cout ;
   reg [7:0] s0, s1, s2, s3, s4;
-  
+
   //function declerations
   add8 adde(s0, cout, ci, a, b);
   sub8 sube(s1, cout, ci, a, b);
   and8 ande(s2,a,b);
   or8 ore(s3,a,b);
   not8 note(s4, a);
-  
-  
+
+
   always @(a,b,ci,aluMode) begin
     if(aluMode==4'b0000) begin//add
       s <= s0;
@@ -114,4 +115,3 @@ module alu(s, cout, ci, a, b, aluMode);
     end
   end
 endmodule
-  
