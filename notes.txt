@@ -1,5 +1,39 @@
+Team  ID mod 32 Word size,bits  Main memory size, bytes Main memory organization  Max number of bits to be used by  L1 cache  Additional addressing mode
+8 256 64 x 8 350 Indirect
+
 Design 1
 1. ISA
-  make decisions on what opcodes/instructions
+  make decisions on what opcodes=instructions
+  0011 add
+  0111 halt
+  0010 store
+  1010 clear
+  1000 skip
+  1001 jump
+
 2. Benchmark program in assembly
+  Fibonacci f(11) is the benchmark program
 3. Translate benchmark to machine codes
+Address, Value, Code
+10, 110C, Load B
+11, 210E, Store Ctr
+12, 310D, Loop, Load Prod
+13, 310B, Add A
+14, 210D, Store Prod
+15, 110E, Load Ctr
+16, 310F, Add Neg1
+17, 210E, Store Ctr
+18, 8400, Skip 400      // 0100 0000 0000   AC == 0
+19, 9102, Jump Loop
+1A, 7000, Halt
+1B, A,    Dec 5
+1C, B,    Dec 7
+1D, Prod, Dec 0
+1E, Ctr,  Hex 0
+1F, Neg1, Dec -1
+
+4. Hardware
+  ALU
+  DRAM 64 x 8 IC, total memory 8*256
+  
+
