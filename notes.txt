@@ -1,0 +1,5 @@
+Design 1
+1. ISA
+  make decisions on what opcodes/instructions
+2. Benchmark program in assembly
+3. Translate benchmark to machine codes
