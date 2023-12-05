@@ -36,4 +36,6 @@ Address, Value, Code
   ALU
   DRAM 64 x 8 IC, total memory 8*256
   
+For design 1A, modify ISA and make changes where selecting function
 
+1B, add cache, edit the memory module(ram_large), will have an additional memory, and if there is a miss it will then go to the DRAM
