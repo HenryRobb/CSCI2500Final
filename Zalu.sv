@@ -93,20 +93,23 @@ module alu(s, a, b, aluMode);
 
 
   always @(*) begin
-    if(aluMode==4'b0000) begin//add
+    if(aluMode==4'b0011) begin//add
       s <= s0;
     end
-    else if(aluMode==4'b0001) begin//subtract
+    else if(aluMode==4'b0100) begin//subtract
       s <= s1;
     end
-    else if(aluMode==4'b0010) begin//and
+    else if(aluMode==4'b0101) begin//and
 	  s <= s2;
     end
-    else if(aluMode==4'b0011) begin//or
+    else if(aluMode==4'b0110) begin//or
 	  s <= s3;
     end
-    else if(aluMode==4'b0100) begin//not
+    else if(aluMode==4'b0001) begin//not
 	  s <= s4;
+    end
+    else if(aluMode==4'b1010) begin//clear
+      s=8'b00000000;
     end
   end
 endmodule

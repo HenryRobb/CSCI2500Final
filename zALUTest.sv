@@ -15,40 +15,57 @@ module test;
     $dumpfile("dump.vcd");
     $dumpvars(1,test);
  	
-    aluMode = 4'b0000;
+    aluMode = 4'b0011;
     a = 0'hab;
     b = 0'hcb;
     
     #10;
     
+    aluMode = 4'b0100;
+    
+    #10;
+    
+    aluMode = 4'b0101;
+    
+    #10;
+    
+    aluMode = 4'b0110;
+    
+    #10;
+    
     aluMode = 4'b0001;
-    
+
+    #10
+
+    aluMode = 4'b1010;
+
     #10;
-    
-    aluMode = 4'b0010;
-    
-    #10;
-    
-    aluMode = 4'b0011;
-    
-    #10;
-    
-    aluMode = 4'b0000;
+
     a = 0'h6f;
     b = 0'he1;
     
+    aluMode = 4'b0011;
+    
+    #10;
+    
+    aluMode = 4'b0100;
+    
+    #10;
+    
+    aluMode = 4'b0101;
+    
+    #10;
+
+    aluMode = 4'b0110;
+
     #10;
     
     aluMode = 4'b0001;
     
     #10;
-    
-    aluMode = 4'b0010;
-    
-    #10;
-    
-    aluMode = 4'b0011;
-    
+
+    aluMode = 4'b1010;
+
     #10;
     
     $finish;
