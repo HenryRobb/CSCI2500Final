@@ -1,0 +1,11 @@
+main memory can hold 256 words
+
+main memory organization is 64x8
+
+max bits to be used by L1 cache is 350
+
+additional addressing mode is indirect
+
+we're doing stack architecture with stack addressing
+
+for stack addressing slide 76 in architecture
