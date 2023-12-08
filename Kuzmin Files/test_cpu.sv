@@ -16,7 +16,7 @@ module test_cpu;
   integer i;
   reg [ADDR_WIDTH-1:0] MAR;
   wire [DATA_WIDTH-1:0] data;
-  reg [DATA_WIDTH-1:0] testbench_data;
+  reg [15:0] testbench_data;
   assign data = !oe ? testbench_data : 'hz;
 
   single_port_sync_ram_large  #(.DATA_WIDTH(DATA_WIDTH)) ram
@@ -28,21 +28,21 @@ module test_cpu;
       .oe(oe)
   );
   
-  reg [15:0] A;
-  reg [15:0] B;
-  reg [15:0] ALU_Out;
-  reg [1:0] ALU_Sel;
+  reg [7:0] A;
+  reg [7:0] B;
+  reg [7:0] ALU_Out;
+  reg [3:0] ALU_Sel;
   alu alu16(
     .A(A),
-    .B(B),  // ALU 16-bit Inputs
+    .B(B),  // ALU 8-bit Inputs
     .ALU_Sel(ALU_Sel),// ALU Selection
-    .ALU_Out(ALU_Out) // ALU 16-bit Output
+    .ALU_Out(ALU_Out) // ALU 8-bit Output
      );
   
-  reg [7:0] PC = 'h100;
-  reg [7:0] IR = 'h0;
-  reg [7:0] MBR = 'h0;
-  reg [7:0] AC = 'h0;
+  reg [7:0] PC = 'h00;
+  reg [7:0] IR = 'h00;
+  reg [7:0] MBR = 'h00;//goes through ALU, has to be 8 bit
+  reg [7:0] AC = 'h00; //goes through ALU, has to be 8 bit
 
   initial osc = 1;  //init clk = 1 for positive-edge triggered
   always begin  // Clock wave
@@ -54,22 +54,22 @@ module test_cpu;
      $dumpfile("dump.vcd");
      $dumpvars;
     // Multiplication by addition program
-    @(posedge clk) MAR <= 'h100; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h110C;
-    @(posedge clk) MAR <= 'h101; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h210E;
-    @(posedge clk) MAR <= 'h102; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h110D;
-    @(posedge clk) MAR <= 'h103; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h310B;
-    @(posedge clk) MAR <= 'h104; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h210D;
-    @(posedge clk) MAR <= 'h105; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h110E;
-    @(posedge clk) MAR <= 'h106; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h310F;
-    @(posedge clk) MAR <= 'h107; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h210E;
-    @(posedge clk) MAR <= 'h108; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h8400;
-    @(posedge clk) MAR <= 'h109; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h9102;
-    @(posedge clk) MAR <= 'h10A; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h7000;
-    @(posedge clk) MAR <= 'h10B; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0005;
-    @(posedge clk) MAR <= 'h10C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0007;
-    @(posedge clk) MAR <= 'h10D; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0000;
-    @(posedge clk) MAR <= 'h10E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0000;
-    @(posedge clk) MAR <= 'h10F; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'hFFFF;
+    @(posedge clk) MAR <= 'h00; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h110C;
+    @(posedge clk) MAR <= 'h01; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h210E;
+    @(posedge clk) MAR <= 'h02; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h110D;
+    @(posedge clk) MAR <= 'h03; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h310B;
+    @(posedge clk) MAR <= 'h04; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h210D;
+    @(posedge clk) MAR <= 'h05; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h110E;
+    @(posedge clk) MAR <= 'h06; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h310F;
+    @(posedge clk) MAR <= 'h07; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h210E;
+    @(posedge clk) MAR <= 'h08; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h8400;
+    @(posedge clk) MAR <= 'h09; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h9102;
+    @(posedge clk) MAR <= 'h0A; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h7000;
+    @(posedge clk) MAR <= 'h0B; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0005;
+    @(posedge clk) MAR <= 'h0C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0007;
+    @(posedge clk) MAR <= 'h0D; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0000;
+    @(posedge clk) MAR <= 'h0E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0000;
+    @(posedge clk) MAR <= 'h0F; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'hFFFF;
     
     
     @(posedge clk) PC <= 'h100;

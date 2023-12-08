@@ -3,7 +3,7 @@
 
 module alu(
            input [7:0] A,B,  // ALU 8-bit Inputs
-           input [1:0] ALU_Sel,// ALU Selection
+           input [3:0] ALU_Sel,// ALU Selection
            output [7:0] ALU_Out // ALU 8-bit Output
     );
     reg [7:0] ALU_Result;
@@ -12,14 +12,25 @@ module alu(
     always @(*)
     begin
         case(ALU_Sel)
-        2'b01: // Addition
+        4'b0011: // Addition
            ALU_Result = A + B ;
-        2'b10: // Subtraction
+        4'b0100: // Subtraction
            ALU_Result = A - B ;
-        3'b11: // Clear
+        4'b11: // Clear
            ALU_Result = 0;
         default: ALU_Result = A;
         endcase
     end
 
 endmodule
+
+// 0001 not
+//   0011 add
+//   0100 sub
+//   0101 and
+//   0110 or
+//   0111 halt
+//   0010 store
+//   1010 clear
+//   1000 skip
+//   1001 jump
