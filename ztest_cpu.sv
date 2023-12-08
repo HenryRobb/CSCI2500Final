@@ -28,15 +28,15 @@ module test_cpu;
       .oe(oe)
   );
   
-  reg [15:0] A;
-  reg [15:0] B;
-  reg [15:0] ALU_Out;
+  reg [7:0] A;
+  reg [7:0] B;
+  reg [7:0] ALU_Out;
   reg [1:0] ALU_Sel;
-  alu alu16(
-    .A(A),
-    .B(B),  // ALU 16-bit Inputs
-    .ALU_Sel(ALU_Sel),// ALU Selection
-    .ALU_Out(ALU_Out) // ALU 16-bit Output
+  alu alu8(
+    .a(A),
+    .b(B),  // ALU 8-bit Inputs
+    .aluMode(ALU_Sel),// ALU Selection
+    .s(ALU_Out) // ALU 8-bit Output
      );
   
   reg [7:0] PC = 'h100;
