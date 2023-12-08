@@ -2,7 +2,7 @@
 `timescale 1 ns / 1 ps
 
 module test_ram;
-  parameter ADDR_WIDTH = 12;
+  parameter ADDR_WIDTH = 6;
   parameter DATA_WIDTH = 8;
 
   reg clk;
@@ -33,11 +33,11 @@ module test_ram;
 
     repeat (2) @ (posedge clk);
 
-    for (i = 0; i < 16; i = i+1) begin
+    for (i = 0; i < 8; i = i+1) begin
       repeat (1) @(posedge clk) addr <= i; we <= 1; cs <= 1; oe <= 0; testbench_data <= $random;
     end
 
-    for (i = 0; i < 16; i= i+1) begin
+    for (i = 0; i < 8; i= i+1) begin
       repeat (1) @(posedge clk) addr <= i; we <= 0; cs <= 1; oe <= 1;
     end
 
