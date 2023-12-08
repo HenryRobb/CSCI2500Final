@@ -1,8 +1,8 @@
 `timescale 1 ns / 1 ps
 
 module test_cpu;
-  parameter ADDR_WIDTH = 14;
-  parameter DATA_WIDTH = 16;
+  parameter ADDR_WIDTH = 8;
+  parameter DATA_WIDTH = 8;
   
   reg osc;
   localparam period = 10;
@@ -28,21 +28,21 @@ module test_cpu;
       .oe(oe)
   );
   
-  reg [15:0] A;
-  reg [15:0] B;
-  reg [15:0] ALU_Out;
+  reg [7:0] A;
+  reg [7:0] B;
+  reg [7:0] ALU_Out;
   reg [1:0] ALU_Sel;
-  alu alu16(
+  alu alu8(
     .A(A),
-    .B(B),  // ALU 16-bit Inputs
+    .B(B),  // ALU 8-bit Inputs
     .ALU_Sel(ALU_Sel),// ALU Selection
-    .ALU_Out(ALU_Out) // ALU 16-bit Output
+    .ALU_Out(ALU_Out) // ALU 8-bit Output
      );
   
-  reg [15:0] PC = 'h100;
-  reg [15:0] IR = 'h0;
-  reg [15:0] MBR = 'h0;
-  reg [15:0] AC = 'h0;
+  reg [7:0] PC = 'h100;
+  reg [7:0] IR = 'h0;
+  reg [7:0] MBR = 'h0;
+  reg [7:0] AC = 'h0;
 
   initial osc = 1;  //init clk = 1 for positive-edge triggered
   always begin  // Clock wave

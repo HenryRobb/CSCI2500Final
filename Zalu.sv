@@ -78,7 +78,7 @@ module or8(s, a, b);
   or(s[7], a[7], b[7]);
 endmodule
 
-module alu(s, a, b, aluMode);
+module alu(a, b, aluMode, s);
   input [7:0] a,b ; // port declarations
   input [3:0] aluMode; //switch between functions
   output reg [7:0] s ; // vector
