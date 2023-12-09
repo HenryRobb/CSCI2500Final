@@ -24,7 +24,7 @@ module single_port_sync_ram_large
       .out(cs) 
   );
   
-  single_port_sync_ram #(.DATA_WIDTH(1)) u01
+  single_port_sync_ram #(.DATA_WIDTH(8)) u01
   (   .clk(clk),
       .addr(addr[ADDR_WIDTH-2:0]),
       .data(data[DATA_WIDTH-1:1]),
@@ -34,7 +34,7 @@ module single_port_sync_ram_large
   );
 
 
-  single_port_sync_ram #(.DATA_WIDTH(1)) u11
+  single_port_sync_ram #(.DATA_WIDTH(8)) u11
   (   .clk(clk),
       .addr(addr[ADDR_WIDTH-2:0]),
       .data(data[DATA_WIDTH-1:1]),
@@ -44,7 +44,7 @@ module single_port_sync_ram_large
   );
 
 
-  single_port_sync_ram #(.DATA_WIDTH(1)) u21
+  single_port_sync_ram #(.DATA_WIDTH(8)) u21
   (   .clk(clk),
       .addr(addr[ADDR_WIDTH-2:0]),
       .data(data[DATA_WIDTH-1:0]),
@@ -53,7 +53,7 @@ module single_port_sync_ram_large
       .oe(oe)
   );
 
-  single_port_sync_ram #(.DATA_WIDTH(1)) u31
+  single_port_sync_ram #(.DATA_WIDTH(8)) u31
   (   .clk(clk),
       .addr(addr[ADDR_WIDTH-2:0]),
       .data(data[DATA_WIDTH-1:0]),
