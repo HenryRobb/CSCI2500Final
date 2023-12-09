@@ -58,34 +58,34 @@ module test_cpu;
      $dumpfile("dump.vcd");
      $dumpvars;
     // Multiplication by addition program
-      @(posedge clk) MAR <= 'h00; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h11;
+      @(posedge clk) MAR <= 'h00; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;
       @(posedge clk) MAR <= 'h01; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0C;
 
-      @(posedge clk) MAR <= 'h02; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h21;
+      @(posedge clk) MAR <= 'h02; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;
       @(posedge clk) MAR <= 'h03; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0E;
 
-      @(posedge clk) MAR <= 'h04; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h11;
+      @(posedge clk) MAR <= 'h04; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;
       @(posedge clk) MAR <= 'h05; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0D;
 
-      @(posedge clk) MAR <= 'h06; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;
+      @(posedge clk) MAR <= 'h06; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;
       @(posedge clk) MAR <= 'h07; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0B;
 
-      @(posedge clk) MAR <= 'h08; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h21;
+      @(posedge clk) MAR <= 'h08; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;
       @(posedge clk) MAR <= 'h09; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0D;
 
-      @(posedge clk) MAR <= 'h0A; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h11;
+      @(posedge clk) MAR <= 'h0A; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;
       @(posedge clk) MAR <= 'h0B; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0E;
 
-      @(posedge clk) MAR <= 'h0C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;
+      @(posedge clk) MAR <= 'h0C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;
       @(posedge clk) MAR <= 'h0D; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0F;
 
-      @(posedge clk) MAR <= 'h0E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h21;
+      @(posedge clk) MAR <= 'h0E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;
       @(posedge clk) MAR <= 'h0F; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0E;
 
       @(posedge clk) MAR <= 'h10; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h84;
       @(posedge clk) MAR <= 'h11; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;
 
-      @(posedge clk) MAR <= 'h12; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h91;
+      @(posedge clk) MAR <= 'h12; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h90;
       @(posedge clk) MAR <= 'h13; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h02;
 
       @(posedge clk) MAR <= 'h14; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h70;
@@ -103,7 +103,7 @@ module test_cpu;
       @(posedge clk) MAR <= 'h1C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;
       @(posedge clk) MAR <= 'h1D; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;
 
-      @(posedge clk) MAR <= 'h1E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'hFF;
+      @(posedge clk) MAR <= 'h1E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'hF0;
       @(posedge clk) MAR <= 'h1F; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'hFF;
 
     
@@ -114,29 +114,37 @@ module test_cpu;
     for (i = 0; i < 64; i = i+1) begin
           // Fetch
           @(posedge clk) MAR <= PC; we <= 0; cs <= 1; oe <= 1;
-          @(posedge clk) IR <= data;
+          @(posedge clk) IR1 <= data;
+          @(posedge clk) PC <= PC + 1;
+
+          @(posedge clk) IR2 <= data;
           @(posedge clk) PC <= PC + 1;
           // Decode and execute
       case(IR[15:12])
+      //load
         4'b0001: begin
-              @(posedge clk) MAR <= IR[11:0];
+              @(posedge clk) MAR <= IR2;
               @(posedge clk) MBR <= data;
               @(posedge clk) AC <= MBR;
         end 
+        //store
 		4'b0010: begin
-              @(posedge clk) MAR <= IR[11:0];
+              @(posedge clk) MAR <= IR2;
               @(posedge clk) MBR <= AC;
               @(posedge clk) we <= 1; oe <= 0; testbench_data <= MBR;      
         end
+        //add
         4'b0011: begin
-              @(posedge clk) MAR <= IR[11:0];
+              @(posedge clk) MAR <= IR2;
               @(posedge clk) MBR <= data;
               @(posedge clk) ALU_Sel <= 'b01; A <= AC; B <= MBR;
               @(posedge clk) AC <= ALU_Out;
         end
+        //halt
         4'b0111: begin
-              @(posedge clk) PC <= PC - 1;
+              @(posedge clk) PC <= PC - 2;
         end
+        //skip
         4'b1000: begin
           @(posedge clk)
           if(IR[11:10]==2'b01 && AC == 0) PC <= PC + 1;
