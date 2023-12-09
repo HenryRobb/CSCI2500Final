@@ -22,9 +22,9 @@ Address value               Code
 16-17   Skipcond  400       / If control variable = 0, skip next instruction to terminate the loop
 18-19   Jump      Loop 
 1A-1B   Halt
-1C-1D   Zero                Dec 0
-1E-1F   T1                  Dec 1
-20-21   T2                  Dec 0
-22-23   Sum                 Dec 0
-24-25   Ctr                 Hex b
-26-27   Pos1                Dec 1
+1C      Zero                Dec 0
+1D      T1                  Dec 1
+1E      T2                  Dec 0
+1F      Sum                 Dec 0
+20      Ctr                 Hex b
+21      Pos1                Dec 1
