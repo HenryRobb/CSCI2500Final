@@ -57,53 +57,84 @@ module test_cpu;
      $dumpvars;
     // Multiplication by addition program
       @(posedge clk) MAR <= 'h00; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
-      @(posedge clk) MAR <= 'h01; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1C;//Zero
+      @(posedge clk) MAR <= 'h01; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;//N
 
-      @(posedge clk) MAR <= 'h02; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;//add
-      @(posedge clk) MAR <= 'h03; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1D;//t1
+      @(posedge clk) MAR <= 'h02; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h40;//sub
+      @(posedge clk) MAR <= 'h03; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h21;//pos1
 
-      @(posedge clk) MAR <= 'h04; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;//add
-      @(posedge clk) MAR <= 'h05; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1E;//t2
+      @(posedge clk) MAR <= 'h04; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
+      @(posedge clk) MAR <= 'h05; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;//Num
 
-      @(posedge clk) MAR <= 'h06; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
-      @(posedge clk) MAR <= 'h07; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1F;//sum
+      @(posedge clk) MAR <= 'h06; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
+      @(posedge clk) MAR <= 'h07; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;//NUM
 
-      @(posedge clk) MAR <= 'h08; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
-      @(posedge clk) MAR <= 'h09; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1D;//t1
+      @(posedge clk) MAR <= 'h08; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
+      @(posedge clk) MAR <= 'h09; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h33;//ctr
 
-      @(posedge clk) MAR <= 'h0A; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
-      @(posedge clk) MAR <= 'h0B; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1E;//t2
+      @(posedge clk) MAR <= 'h0a; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
+      @(posedge clk) MAR <= 'h0b; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h32;//prod
 
-      @(posedge clk) MAR <= 'h0C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
-      @(posedge clk) MAR <= 'h0D; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1F;//sum
+      @(posedge clk) MAR <= 'h0c; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;//add
+      @(posedge clk) MAR <= 'h0d; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;//N
 
-      @(posedge clk) MAR <= 'h0E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
-      @(posedge clk) MAR <= 'h0F; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h1D;//t1
+      @(posedge clk) MAR <= 'h0e; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
+      @(posedge clk) MAR <= 'h0f; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h32;//prod
 
       @(posedge clk) MAR <= 'h10; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
-      @(posedge clk) MAR <= 'h11; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//ctr
+      @(posedge clk) MAR <= 'h11; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h33;//ctr
 
       @(posedge clk) MAR <= 'h12; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h40;//sub
       @(posedge clk) MAR <= 'h13; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h21;//pos1
 
       @(posedge clk) MAR <= 'h14; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
-      @(posedge clk) MAR <= 'h15; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//ctr
+      @(posedge clk) MAR <= 'h15; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h33;//ctr
 
       @(posedge clk) MAR <= 'h16; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h81;//skip cond 400
       @(posedge clk) MAR <= 'h17; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//unneccessary
 
       @(posedge clk) MAR <= 'h18; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h90;//jump
-      @(posedge clk) MAR <= 'h19; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//00
+      @(posedge clk) MAR <= 'h19; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0A;//0A
 
-      @(posedge clk) MAR <= 'h1A; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h70;//halt
-      @(posedge clk) MAR <= 'h1B; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//halt
+      @(posedge clk) MAR <= 'h1a; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
+      @(posedge clk) MAR <= 'h1b; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;//NUM
 
-      @(posedge clk) MAR <= 'h1C; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//zero=0
-      @(posedge clk) MAR <= 'h1D; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h01;//t1=1
-      @(posedge clk) MAR <= 'h1E; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//t2=0
-      @(posedge clk) MAR <= 'h1F; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//sum=0
-      @(posedge clk) MAR <= 'h20; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h0A;//ctr=b
-      @(posedge clk) MAR <= 'h21; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h01;//pos1=1
+      @(posedge clk) MAR <= 'h1c; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h40;//sub
+      @(posedge clk) MAR <= 'h1d; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h21;//pos1
+
+      @(posedge clk) MAR <= 'h1e; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
+      @(posedge clk) MAR <= 'h1f; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;//Num
+
+      @(posedge clk) MAR <= 'h20; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
+      @(posedge clk) MAR <= 'h21; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h32;//prod
+
+      @(posedge clk) MAR <= 'h22; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
+      @(posedge clk) MAR <= 'h23; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h30;//N
+
+      @(posedge clk) MAR <= 'h24; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
+      @(posedge clk) MAR <= 'h25; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h35;//zero
+
+      @(posedge clk) MAR <= 'h26; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h20;//store
+      @(posedge clk) MAR <= 'h27; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h32;//prod
+
+      @(posedge clk) MAR <= 'h28; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h10;//load
+      @(posedge clk) MAR <= 'h29; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h31;//NUM
+
+      @(posedge clk) MAR <= 'h2a; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h81;//skip cond 400
+      @(posedge clk) MAR <= 'h2b; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//unneccessary
+
+      @(posedge clk) MAR <= 'h2c; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h90;//jump
+      @(posedge clk) MAR <= 'h2d; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h06;//06
+
+      @(posedge clk) MAR <= 'h2e; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h70;//halt
+      @(posedge clk) MAR <= 'h2f; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//halt
+
+      @(posedge clk) MAR <= 'h30; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h05;//zero=0
+      @(posedge clk) MAR <= 'h31; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//t1=1
+      @(posedge clk) MAR <= 'h32; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//t2=0
+      @(posedge clk) MAR <= 'h33; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//sum=0
+      @(posedge clk) MAR <= 'h34; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h01;//ctr=b
+      @(posedge clk) MAR <= 'h35; we <= 1; cs <= 1; oe <= 0; testbench_data <= 'h00;//pos1=1
+
 
     
     
