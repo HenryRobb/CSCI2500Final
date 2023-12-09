@@ -7,27 +7,24 @@
 
 
 FIB
-
-Loop, Load  Zero     /Load zero into AC
-    Add T1          /Step 1a 
-    Add T2          /Step 1b
-    Store Sum       /End Step 1
-    Load T1         /Step 2a
-    Store T2        /Step 2b
-    Load Sum        /Step 3a
-    Store T1        /Step 3b
-
-
-    Load      Ctr        / Load the loop control variable
-    Add       Neg1       / Decrement the loop control variable by one
-    Store     Ctr        / Store the new value of the loop control variable
-    Skipcond  400        / If control variable = 0, skip next instruction to terminate the loop
-    Jump      Loop 
-    Halt
-
-Zero    Dec     0
-T1,     Dec     1
-T2,     Dec     0
-Sum,    Dec     0
-Ctr,    Hex     b
-Neg1,   Dec     -1
+Address value               Code
+00-01   Loop, Load  Zero    /Load zero into AC
+02-03   Add T1              /Step 1a 
+04-05   Add T2              /Step 1b
+06-07   Store Sum           /End Step 1
+08-09   Load T1             /Step 2a
+0A-0B   Store T2            /Step 2b
+0C-0D   Load Sum            /Step 3a
+0E-0F   Store T1            /Step 3b
+10-11   Load      Ctr       / Load the loop control variable
+12-13   Sub       Pos1      / Decrement the loop control variable by one
+14-15   Store     Ctr       / Store the new value of the loop control variable
+16-17   Skipcond  400       / If control variable = 0, skip next instruction to terminate the loop
+18-19   Jump      Loop 
+1A-1B   Halt
+1C-1D   Zero                Dec 0
+1E-1F   T1                  Dec 1
+20-21   T2                  Dec 0
+22-23   Sum                 Dec 0
+24-25   Ctr                 Hex b
+26-27   Pos1                Dec 1
