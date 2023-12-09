@@ -110,12 +110,12 @@ module test_cpu;
     
     @(posedge clk) PC <= 'h00;
     
-    for (i = 0; i < 64; i = i+1) begin
+    for (i = 0; i < 250; i = i+1) begin
           // Fetch
           @(posedge clk) MAR <= PC; we <= 0; cs <= 1; oe <= 1;
           @(posedge clk) IRA <= data;
           @(posedge clk) PC <= PC + 1;
-
+          @(posedge clk) MAR <= PC;
           @(posedge clk) IRB <= data;
           @(posedge clk) PC <= PC + 1;
           // Decode and execute
@@ -136,7 +136,14 @@ module test_cpu;
         4'b0011: begin
               @(posedge clk) MAR <= IRB;
               @(posedge clk) MBR <= data;
-              @(posedge clk) ALU_Sel <= 'b01; A <= AC; B <= MBR;
+              @(posedge clk) ALU_Sel <= 'h3; A <= AC; B <= MBR;
+              @(posedge clk) AC <= ALU_Out;
+        end
+        //subtract
+        4'b0100: begin
+              @(posedge clk) MAR <= IRB;
+              @(posedge clk) MBR <= data;
+          @(posedge clk) ALU_Sel <= 'h4; A <= AC; B <= MBR;
               @(posedge clk) AC <= ALU_Out;
         end
         //halt
