@@ -43,8 +43,8 @@ module test_cpu;
      );
   
   reg [7:0] PC = 'h00;
-  reg [7:0] IR1 = 'h00;
-  reg [7:0] IR2 = 'h00;
+  reg [7:0] IRA = 'h00;
+  reg [7:0] IRB = 'h00;
   reg [7:0] MBR = 'h00;//goes through ALU, has to be 8 bit
   reg [7:0] AC = 'h00; //goes through ALU, has to be 8 bit
 
@@ -115,28 +115,28 @@ module test_cpu;
     for (i = 0; i < 64; i = i+1) begin
           // Fetch
           @(posedge clk) MAR <= PC; we <= 0; cs <= 1; oe <= 1;
-          @(posedge clk) IR1 <= data;
+          @(posedge clk) IRA <= data;
           @(posedge clk) PC <= PC + 1;
 
-          @(posedge clk) IR2 <= data;
+          @(posedge clk) IRB <= data;
           @(posedge clk) PC <= PC + 1;
           // Decode and execute
-      case(IR1[7:4])
+      case(IRA[7:4])
       //load
         4'b0001: begin
-              @(posedge clk) MAR <= IR2;
+              @(posedge clk) MAR <= IRB;
               @(posedge clk) MBR <= data;
               @(posedge clk) AC <= MBR;
         end 
         //store
 		4'b0010: begin
-              @(posedge clk) MAR <= IR2;
+              @(posedge clk) MAR <= IRB;
               @(posedge clk) MBR <= AC;
               @(posedge clk) we <= 1; oe <= 0; testbench_data <= MBR;      
         end
         //add
         4'b0011: begin
-              @(posedge clk) MAR <= IR2;
+              @(posedge clk) MAR <= IRB;
               @(posedge clk) MBR <= data;
               @(posedge clk) ALU_Sel <= 'b01; A <= AC; B <= MBR;
               @(posedge clk) AC <= ALU_Out;
@@ -148,12 +148,12 @@ module test_cpu;
         //skip
         4'b1000: begin
           @(posedge clk)
-          if(IR1[1:0]==2'b01 && AC == 0) PC <= PC + 2;
-          else if(IR1[1:0]==2'b00 && AC < 0) PC <= PC + 2;
-          else if(IR1[1:0]==2'b10 && AC > 0) PC <= PC + 2;
+          if(IRA[1:0]==2'b01 && AC == 0) PC <= PC + 2;
+          else if(IRA[1:0]==2'b00 && AC < 0) PC <= PC + 2;
+          else if(IRA[1:0]==2'b10 && AC > 0) PC <= PC + 2;
         end
         4'b1001: begin
-              @(posedge clk) PC <= IR2;
+              @(posedge clk) PC <= IRB;
         end
         4'b1010: begin
           @(posedge clk) AC <= 0;
