@@ -4,7 +4,8 @@ Team  ID mod 32 Word size,bits  Main memory size, bytes Main memory organization
 Design 1
 1. ISA
   make decisions on what opcodes=instructions
-  0001 not
+  1111 not
+  0001 load
   0011 add
   0100 sub
   0101 and

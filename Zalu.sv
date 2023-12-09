@@ -105,7 +105,7 @@ module alu(a, b, aluMode, s);
     else if(aluMode==4'b0110) begin//or
 	  s <= s3;
     end
-    else if(aluMode==4'b0001) begin//not
+    else if(aluMode==4'b1111) begin//not
 	  s <= s4;
     end
     else if(aluMode==4'b1010) begin//clear
