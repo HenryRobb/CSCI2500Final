@@ -6,7 +6,7 @@
 
 module single_port_sync_ram_large
   # ( parameter ADDR_WIDTH = 8,
-      parameter DATA_WIDTH = 8,
+      parameter DATA_WIDTH = 8
     )
   
   (   input clk,
