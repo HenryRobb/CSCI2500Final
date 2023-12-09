@@ -7,7 +7,7 @@
 /Step 6: Jump back to Step 1
     
     Load        N          / Load N into AC
-    Add         Neg1
+    Sub         Pos1
     Store       Num        / Store the number of loop iterations in loop control variable
 
 Loop2,Load Num           /Setting the Ctr to be equal to Num
