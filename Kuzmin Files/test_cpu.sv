@@ -19,7 +19,7 @@ module test_cpu;
   integer i;
   reg [ADDR_WIDTH-1:0] MAR;
   wire [DATA_WIDTH-1:0] data;
-  reg [15:0] testbench_data;
+  reg [ADDR_WIDTH-1:0] testbench_data;
   assign data = !oe ? testbench_data : 'hz;
 
   single_port_sync_ram_large  #(.DATA_WIDTH(DATA_WIDTH)) ram
@@ -36,10 +36,10 @@ module test_cpu;
   reg [7:0] ALU_Out;
   reg [3:0] ALU_Sel;
   alu alu16(
-    .A(A),
-    .B(B),  // ALU 8-bit Inputs
-    .ALU_Sel(ALU_Sel),// ALU Selection
-    .ALU_Out(ALU_Out) // ALU 8-bit Output
+    .a(A),
+    .b(B),  // ALU 8-bit Inputs
+    .aluMode(ALU_Sel),// ALU Selection
+    .s(ALU_Out) // ALU 8-bit Output
      );
   
   reg [7:0] PC = 'h00;
@@ -120,7 +120,7 @@ module test_cpu;
           @(posedge clk) IR2 <= data;
           @(posedge clk) PC <= PC + 1;
           // Decode and execute
-      case(IR[15:12])
+      case(IR1[7:4])
       //load
         4'b0001: begin
               @(posedge clk) MAR <= IR2;
@@ -147,12 +147,12 @@ module test_cpu;
         //skip
         4'b1000: begin
           @(posedge clk)
-          if(IR[11:10]==2'b01 && AC == 0) PC <= PC + 1;
-          else if(IR[11:10]==2'b00 && AC < 0) PC <= PC + 1;
-          else if(IR[11:10]==2'b10 && AC > 0) PC <= PC + 1;
+          if(IR1[5:4]==2'b01 && AC == 0) PC <= PC + 2;
+          else if(IR1[5:4]==2'b00 && AC < 0) PC <= PC + 2;
+          else if(IR1[5:4]==2'b10 && AC > 0) PC <= PC + 2;
         end
         4'b1001: begin
-              @(posedge clk) PC <= IR[11:0];
+              @(posedge clk) PC <= IR2;
         end
         4'b1010: begin
           @(posedge clk) AC <= 0;
@@ -163,7 +163,7 @@ module test_cpu;
     end
     
       
-    @(posedge clk) MAR <= 'h10D; we <= 0; cs <= 1; oe <= 1;
+    @(posedge clk) MAR <= 'h0D; we <= 0; cs <= 1; oe <= 1;
     
     @(posedge clk)
         
