@@ -148,9 +148,9 @@ module test_cpu;
         //skip
         4'b1000: begin
           @(posedge clk)
-          if(IR1[5:4]==2'b01 && AC == 0) PC <= PC + 2;
-          else if(IR1[5:4]==2'b00 && AC < 0) PC <= PC + 2;
-          else if(IR1[5:4]==2'b10 && AC > 0) PC <= PC + 2;
+          if(IR1[1:0]==2'b01 && AC == 0) PC <= PC + 2;
+          else if(IR1[1:0]==2'b00 && AC < 0) PC <= PC + 2;
+          else if(IR1[1:0]==2'b10 && AC > 0) PC <= PC + 2;
         end
         4'b1001: begin
               @(posedge clk) PC <= IR2;
