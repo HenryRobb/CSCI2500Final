@@ -4,8 +4,6 @@
 `timescale 1 ns / 1 ps
 
 module test_cpu;
-  parameter ADDR_WIDTH = 8;
-  parameter DATA_WIDTH = 8;
   
   reg osc;
   localparam period = 10;
@@ -17,15 +15,15 @@ module test_cpu;
   reg we;
   reg oe;
   integer i;
-  reg [ADDR_WIDTH-1:0] MAR;
-  wire [DATA_WIDTH-1:0] data;
-  reg [ADDR_WIDTH-1:0] testbench_data;
+  reg [7:0] MAR;
+  wire [7:0] data;
+  reg [7:0] testbench_data;
   assign data = !oe ? testbench_data : 'hz;
 
-  single_port_sync_ram_large  #(.DATA_WIDTH(DATA_WIDTH)) ram
+  single_port_sync_ram_large  #(.DATA_WIDTH(8)) ram
   (   .clk(clk),
    .addr(MAR),
-      .data(data[DATA_WIDTH-1:0]),
+      .data(data[7:0]),
       .cs_input(cs),
       .we(we),
       .oe(oe)
@@ -35,7 +33,7 @@ module test_cpu;
   reg [7:0] B;
   reg [7:0] ALU_Out;
   reg [3:0] ALU_Sel;
-  alu alu16(
+  alu alu8(
     .a(A),
     .b(B),  // ALU 8-bit Inputs
     .aluMode(ALU_Sel),// ALU Selection
