@@ -4,17 +4,20 @@ Team  ID mod 32 Word size,bits  Main memory size, bytes Main memory organization
 Design 1
 1. ISA
   make decisions on what opcodes=instructions
-  1111 not
-  0001 load
-  0011 add
-  0100 sub
-  0101 and
-  0110 or
-  0111 halt
-  0010 store
-  1010 clear
-  1000 skip
-  1001 jump
+  
+  1 0001 load
+  2 0010 store
+  3 0011 add
+  4 0100 sub
+  5 0101 and
+  6 0110 or
+  7 0111 halt
+  8 1000 skip
+  9 1001 jump
+  A 1010 clear
+  F 1111 not
+  
+  
 
 2. Benchmark program in assembly
   Fibonacci f(11) is the benchmark program
