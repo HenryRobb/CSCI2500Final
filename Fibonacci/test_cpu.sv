@@ -136,14 +136,35 @@ module test_cpu;
         4'b0011: begin
               @(posedge clk) MAR <= IRB;
               @(posedge clk) MBR <= data;
-              @(posedge clk) ALU_Sel <= 'h3; A <= AC; B <= MBR;
+              @(posedge clk) ALU_Sel <= 'b0011; A <= AC; B <= MBR;
               @(posedge clk) AC <= ALU_Out;
         end
         //subtract
         4'b0100: begin
               @(posedge clk) MAR <= IRB;
               @(posedge clk) MBR <= data;
-          @(posedge clk) ALU_Sel <= 'h4; A <= AC; B <= MBR;
+              @(posedge clk) ALU_Sel <= 'b0100; A <= AC; B <= MBR;
+              @(posedge clk) AC <= ALU_Out;
+        end
+        //and
+        4'b0100: begin
+              @(posedge clk) MAR <= IRB;
+              @(posedge clk) MBR <= data;
+              @(posedge clk) ALU_Sel <= 'b0101; A <= AC; B <= MBR;
+              @(posedge clk) AC <= ALU_Out;
+        end
+        //or
+        4'b0100: begin
+              @(posedge clk) MAR <= IRB;
+              @(posedge clk) MBR <= data;
+              @(posedge clk) ALU_Sel <= 'b0110; A <= AC; B <= MBR;
+              @(posedge clk) AC <= ALU_Out;
+        end
+        //not
+        4'b0100: begin
+              @(posedge clk) MAR <= IRB;
+              @(posedge clk) MBR <= data;
+              @(posedge clk) ALU_Sel <= 'b1111; A <= AC; B <= MBR;
               @(posedge clk) AC <= ALU_Out;
         end
         //halt
@@ -157,9 +178,18 @@ module test_cpu;
           else if(IRA[1:0]==2'b00 && AC < 0) PC <= PC + 2;
           else if(IRA[1:0]==2'b10 && AC > 0) PC <= PC + 2;
         end
+        //jump
         4'b1001: begin
               @(posedge clk) PC <= IRB;
         end
+        //return
+        4'b1001: begin
+              @(posedge clk) MAR <= IRB;
+              @(posedge clk) PC <= data;
+        end
+        //jump with linking
+        
+        //clear
         4'b1010: begin
           @(posedge clk) AC <= 0;
         end
