@@ -191,7 +191,7 @@ module test_cpu;
               @(posedge clk) PC <= MBR;
         end
         //jump with linking
-        4'b:1100 begin
+        4'b1100 begin
             @(posedge clk) MAR <= IRB;
             @(posedge clk) ALU_Sel <= 'b0011; A <= PC; B <= 'b0001;
             @(posedge clk) MBR <= ALU_Out;
