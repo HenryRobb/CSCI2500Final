@@ -7,7 +7,6 @@
 module single_port_sync_ram_large
   # ( parameter ADDR_WIDTH = 8,
       parameter DATA_WIDTH = 8,
-      parameter DATA_WIDTH_SHIFT = 0
     )
   
   (   input clk,
@@ -27,8 +26,8 @@ module single_port_sync_ram_large
   
   single_port_sync_ram #(.DATA_WIDTH(1)) u01
   (   .clk(clk),
-      .addr(addr[ADDR_WIDTH-3:0]),
-      .data(data[DATA_WIDTH-1:DATA_WIDTH>>DATA_WIDTH_SHIFT]),
+      .addr(addr[ADDR_WIDTH-2:0]),
+      .data(data[DATA_WIDTH-1:1]),
       .cs(cs[0]),
       .we(we),
       .oe(oe)
@@ -37,8 +36,8 @@ module single_port_sync_ram_large
 
   single_port_sync_ram #(.DATA_WIDTH(1)) u11
   (   .clk(clk),
-      .addr(addr[ADDR_WIDTH-3:0]),
-      .data(data[DATA_WIDTH-1:DATA_WIDTH>>DATA_WIDTH_SHIFT]),
+      .addr(addr[ADDR_WIDTH-2:0]),
+      .data(data[DATA_WIDTH-1:1]),
       .cs(cs[1]),
       .we(we),
       .oe(oe)
@@ -47,8 +46,8 @@ module single_port_sync_ram_large
 
   single_port_sync_ram #(.DATA_WIDTH(1)) u21
   (   .clk(clk),
-      .addr(addr[ADDR_WIDTH-3:0]),
-      .data(data[DATA_WIDTH-1:DATA_WIDTH>>DATA_WIDTH_SHIFT]),
+      .addr(addr[ADDR_WIDTH-2:0]),
+      .data(data[DATA_WIDTH-1:0]),
       .cs(cs[2]),
       .we(we),
       .oe(oe)
@@ -56,8 +55,8 @@ module single_port_sync_ram_large
 
   single_port_sync_ram #(.DATA_WIDTH(1)) u31
   (   .clk(clk),
-      .addr(addr[ADDR_WIDTH-3:0]),
-      .data(data[DATA_WIDTH-1:DATA_WIDTH>>DATA_WIDTH_SHIFT]),
+      .addr(addr[ADDR_WIDTH-2:0]),
+      .data(data[DATA_WIDTH-1:0]),
       .cs(cs[3]),
       .we(we),
       .oe(oe)
