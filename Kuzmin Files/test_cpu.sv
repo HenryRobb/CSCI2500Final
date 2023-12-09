@@ -1,3 +1,6 @@
+//is implementation of 8 bits correct in ram and ram_large and is the implementation of 64x8bit and 256 byte memory correct
+//how does our splitting of instructions affect ir
+
 `timescale 1 ns / 1 ps
 
 module test_cpu;
@@ -40,7 +43,8 @@ module test_cpu;
      );
   
   reg [7:0] PC = 'h00;
-  reg [7:0] IR = 'h00;
+  reg [7:0] IR1 = 'h00;
+  reg [7:0] IR2 = 'h00;
   reg [7:0] MBR = 'h00;//goes through ALU, has to be 8 bit
   reg [7:0] AC = 'h00; //goes through ALU, has to be 8 bit
 
