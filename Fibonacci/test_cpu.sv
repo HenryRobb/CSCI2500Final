@@ -185,10 +185,13 @@ module test_cpu;
         //return
         4'b1001: begin
               @(posedge clk) MAR <= IRB;
-              @(posedge clk) PC <= data;
+              @(posedge clk) MBR <= data;
+              @(posedge clk) MAR <= MBR;
+              @(posedge clk) MBR <= data;
+              @(posedge clk) PC <= MBR;
         end
         //jump with linking
-        
+
         //clear
         4'b1010: begin
           @(posedge clk) AC <= 0;
